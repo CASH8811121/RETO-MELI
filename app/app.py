@@ -1,4 +1,5 @@
 from flask import Flask, render_template, request, redirect, url_for, Response, jsonify, session
+from decouple import config
 import random
 import requests
 
@@ -8,13 +9,13 @@ from authlib.integrations.flask_client import OAuth
 app=Flask(__name__)
 
 #PRUEBA OAUTH
-app.secret_key='random secret'
+app.secret_key=config('LLAVE_SECRETA_APP')
 
 oauth = OAuth(app)
 gooogle = oauth.register(
     name='google',
-    client_id= '1023078284492-fphn3qt1boprcs90ftm8jinf1hrq8v3c.apps.googleusercontent.com',
-    client_secret='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',
+    client_id=config('CLIENTE_ID'),
+    client_secret=config('CLIENTE_SECRETO'),
     access_token_url='https://accounts.google.com/o/oauth2/token',
     access_token_params=None,
     authorize_url='https://accounts.google.com/o/oauth2/auth',
