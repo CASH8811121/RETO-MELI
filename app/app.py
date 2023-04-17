@@ -1,12 +1,72 @@
-from flask import Flask, render_template, request, redirect, url_for, Response, jsonify
+from flask import Flask, render_template, request, redirect, url_for, Response, jsonify, session
 import random
 import requests
 
+#PRUEBA OAUTH
+from authlib.integrations.flask_client import OAuth
+
 app=Flask(__name__)
-#Pgina index
+
+#PRUEBA OAUTH
+app.secret_key='random secret'
+
+oauth = OAuth(app)
+gooogle = oauth.register(
+    name='google',
+    client_id= '1023078284492-fphn3qt1boprcs90ftm8jinf1hrq8v3c.apps.googleusercontent.com',
+    client_secret='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',
+    access_token_url='https://accounts.google.com/o/oauth2/token',
+    access_token_params=None,
+    authorize_url='https://accounts.google.com/o/oauth2/auth',
+    authorize_params=None,
+    api_base_url='https://www.googleapis.com/oauth2/v1/',
+    server_metadata_url='https://accounts.google.com/.well-known/openid-configuration',
+    client_kwargs={'scope' : 'email'},
+)
+  
+#Pagina index
 @app.route('/')
 def indice():
-    return render_template('index.html')
+    email = dict(session).get('email', None) 
+    return render_template('index.html',email=email)
+
+ # ruta para login
+ 
+@app.route('/login')
+def login():
+    google = oauth.create_client('google')
+    redirect_uri = url_for('authorize', _external=True)
+    return google.authorize_redirect(redirect_uri)
+
+ # ruta para autorizacion
+
+@app.route('/authorize')
+def authorize():
+    google = oauth.create_client('google')
+    token = google.authorize_access_token()
+    resp = google.get('userinfo')
+    resp.raise_for_status()
+    user_info = resp.json()
+    session['email'] = user_info ['email']
+    
+    # lo va a redireccionar a la principal
+    return redirect('/')
+
+
+ # ruta para logout
+
+@app.route('/logout')
+def logout():
+    for key in list(session.keys()):
+        session.pop(key)
+        # lo va a redireccionar a la principal
+    return redirect('/')
+
+ 
+ 
+
+
+################# rutas challengue pokemon ################# 
 
 #Obetener el tipo de Pokemon por su nombre
 
@@ -33,6 +93,16 @@ def obtener_tipo_pokemon():
             <input type="submit" value="Consultar">
         </form>
     '''
+
+
+
+
+
+
+
+
+
+
 
 #Obetener el tipo de Pokemon al azar por su tipo
 
