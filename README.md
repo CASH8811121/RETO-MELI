@@ -2,7 +2,13 @@
 
 #  Requisitos
 
-Python, IDE (VSCODE), virtualenv.
+Python, IDE (VSCODE), virtualenv, GIT.
+
+https://git-scm.com/download/win
+https://code.visualstudio.com/python
+https://www.python.org/ftp/python/3.11.3/python-3.11.3-amd64.exe
+
+
 
 
 # Inicializar
