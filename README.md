@@ -17,8 +17,12 @@ Se debe seguir los siguientes pasos para poder inicializar el entorno de pruebas
 
 * **1-** Clonar el repositorio en IDE de preferencia VSCODE: 
 `git clone https://github.com/CASH8811121/RETO-MELI.git`
-* **2-** Iniciar el enviroment en el IDE: 
+* **2-** Asegurarse de instalar virtualenv en el IDE desde terminal: 
+`pip install virtualenv`
+* **3-** Iniciar el enviroment en el IDE: 
 `.\env\Scripts\activate`
+Comprobar con pip list si esta instalado
+
 * **3-** instalar los componentes necesarios: 
 `pip install -r requirements.txt`
 * **4-** Correr la API: 
