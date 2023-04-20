@@ -19,12 +19,15 @@ Se debe seguir los siguientes pasos para poder inicializar el entorno de pruebas
 `git clone https://github.com/CASH8811121/RETO-MELI.git`
 * **2-** Asegurarse de instalar virtualenv en el IDE desde terminal: 
 `pip install virtualenv`
-* **3-** Iniciar el enviroment en el IDE: 
-`.\env\Scripts\activate`
+* **3-** ejecutar este comando en powershell (como administrador) para permitir ejecucion remota de codigo desde el IDE: 
+`Set-ExecutionPolicy RemoteSigned -Force`
+* **4-** en el IDE creamos el enviroment virtual llamado env: 
+`virtualenv -p python3 env`
+* **5-** Iniciar el enviroment en el IDE: 
+`.\env\Scripts\activate`  
 Comprobar con pip list si esta instalado
-
-* **3-** instalar los componentes necesarios: 
-`pip install -r requirements.txt`
+* **4-** instalar los componentes necesarios para iniciar la API: 
+`pip install -r requeriments.txt`
 * **4-** Correr la API: 
 `python .\app\app.py`
 * **4-** Acceder a WEB localhost mediante URL: 
